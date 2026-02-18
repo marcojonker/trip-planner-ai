@@ -1,0 +1,29 @@
+<div class="query-box">
+  <input 
+    type="text"
+    class="query-input"
+    placeholder="Tell me what you want to do and where you're starting from..."
+    [(ngModel)]="query"
+    (keydown)="handleKeyDown($event)"
+    [disabled]="isLoading"
+  >
+  
+  <button 
+    class="location-button"
+    [ngClass]="getLocationButtonClass()"
+    (click)="onLocationClick.emit()"
+    [disabled]="isLoading"
+    title="Use current location">
+    ⊙
+  </button>
+  
+  <button 
+    class="submit-button"
+    (click)="handleSubmit()"
+    [disabled]="isLoading || !query.trim()">
+    <span *ngIf="!isLoading">→ Plan Trip</span>
+    <span *ngIf="isLoading">
+      <span class="spinner"></span> Planning...
+    </span>
+  </button>
+</div>

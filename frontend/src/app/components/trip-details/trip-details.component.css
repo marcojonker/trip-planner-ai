@@ -1,0 +1,264 @@
+.trip-details-sidebar {
+  position: fixed;
+  right: 0;
+  width: 350px;
+  background-color: #151c35;
+  border-left: 2px solid #4a90e2;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  bottom: 0;
+  z-index: 99;
+  max-height: calc(100vh - 0px);
+}
+
+.trip-details-container {
+  padding: 20px;
+}
+
+.trip-details-container h2 {
+  color: #4a90e2;
+  font-size: 18px;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2d3a5c;
+}
+
+.trip-items {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.trip-item {
+  background-color: #0f1428;
+  border: 1px solid #2d3a5c;
+  border-radius: 6px;
+  padding: 15px;
+  transition: all 0.3s ease;
+}
+
+.trip-item:hover {
+  border-color: #4a90e2;
+  background-color: #1a2445;
+}
+
+.trip-header {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.trip-number {
+  background-color: #4a90e2;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.trip-main-info {
+  flex: 1;
+}
+
+.trip-main-info h3 {
+  color: #e0e0e0;
+  font-size: 15px;
+  margin: 0 0 4px 0;
+}
+
+.trip-main-info h3.clickable-location {
+  cursor: pointer;
+  color: #4a90e2;
+  transition: all 0.2s ease;
+  text-decoration: underline;
+}
+
+.trip-main-info h3.clickable-location:hover {
+  color: #6aade2;
+  text-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
+}
+
+.value.clickable-location {
+  cursor: pointer;
+  color: #2196F3;
+  transition: all 0.2s ease;
+  text-decoration: underline;
+}
+
+.value.clickable-location:hover {
+  color: #64B5F6;
+  text-shadow: 0 0 8px rgba(33, 150, 243, 0.4);
+}
+
+.trip-task {
+  color: #a0a0a0;
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.trip-distance {
+  color: #4a90e2;
+  font-size: 12px;
+  margin: 4px 0 0 0;
+  font-weight: 600;
+}
+
+.trip-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-row.full-width {
+  margin-top: 5px;
+}
+
+.label {
+  color: #8a8a8a;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.value {
+  color: #e0e0e0;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.reason {
+  color: #c0c0c0;
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 0;
+  font-style: italic;
+}
+
+.alternative-section {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #2d3a5c;
+}
+
+.alternative-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background-color: #1a2445;
+  border: 1px solid #2d3a5c;
+  color: #4a90e2;
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.alternative-toggle:hover {
+  background-color: #202d45;
+  border-color: #4a90e2;
+}
+
+.alternative-toggle span {
+  display: inline-block;
+  font-size: 10px;
+  transition: transform 0.3s ease;
+}
+
+.alternative-details {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #1a2445;
+  border-radius: 4px;
+  border-left: 3px solid #4a90e2;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    transform: translateY(0);
+  }
+}
+
+.divider {
+  height: 1px;
+  background-color: #2d3a5c;
+  margin: 10px 0;
+}
+
+.empty-state {
+  position: fixed;
+  right: 0;
+  width: 350px;
+  background-color: #151c35;
+  border-left: 2px solid #4a90e2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 20px;
+  text-align: center;
+  color: #6a6a7a;
+  z-index: 99;
+}
+
+@media (max-width: 1024px) {
+  .trip-details-sidebar {
+    width: 300px;
+  }
+  
+  .empty-state {
+    width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trip-details-sidebar,
+  .empty-state {
+    width: 100%;
+    position: relative;
+    top: auto !important;
+    border-left: none;
+    border-top: 2px solid #4a90e2;
+    max-height: none;
+  }
+}
+
+/* Scrollbar styling */
+.trip-details-sidebar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.trip-details-sidebar::-webkit-scrollbar-track {
+  background: #0f1428;
+}
+
+.trip-details-sidebar::-webkit-scrollbar-thumb {
+  background: #4a90e2;
+  border-radius: 4px;
+}
+
+.trip-details-sidebar::-webkit-scrollbar-thumb:hover {
+  background: #3a7dd1;
+}

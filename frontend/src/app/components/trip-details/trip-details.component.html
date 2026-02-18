@@ -1,0 +1,81 @@
+<div class="trip-details-sidebar" [ngStyle]="detailsStyle" *ngIf="tripData">
+  <div class="trip-details-container">
+    <h2>📍 Trip Plan</h2>
+    
+    <div class="trip-items">
+      <div class="trip-item" *ngFor="let feature of tripData.features; let i = index">
+        <div class="trip-header">
+          <div class="trip-number">{{ i + 1 }}</div>
+          <div class="trip-main-info">
+            <h3 class="clickable-location" (click)="zoomToLocation(feature)" title="Click to zoom to this location">{{ feature.properties.name }}</h3>
+            <p class="trip-task">{{ feature.properties.task }}</p>
+            <p class="trip-distance">📏 {{ formatDistance(feature.properties.distance) }}</p>
+          </div>
+        </div>
+
+        <div class="trip-details-content">
+          <div class="detail-row">
+            <span class="label">Address:</span>
+            <span class="value">{{ feature.properties.street }} {{ feature.properties.houseNumber }}, {{ feature.properties.city }}, {{ feature.properties.country }}</span>
+          </div>
+
+          <div class="detail-row">
+            <span class="label">Coordinates:</span>
+            <span class="value">{{ feature.geometry.coordinates[1].toFixed(7) }}, {{ feature.geometry.coordinates[0].toFixed(7) }}</span>
+          </div>
+
+          <div class="detail-row" *ngIf="feature.properties.openingHours">
+            <span class="label">Opening Hours:</span>
+            <span class="value" *ngIf="feature.properties.openingHours.length > 0">
+              {{ feature.properties.openingHours.join(', ') }}
+            </span>
+            <span class="value" *ngIf="feature.properties.openingHours.length === 0">Not available</span>
+          </div>
+
+          <div class="detail-row full-width" *ngIf="feature.properties.reason">
+            <span class="label">Why this location?</span>
+            <p class="reason">{{ feature.properties.reason }}</p>
+          </div>
+
+          <div class="alternative-section" *ngIf="feature.properties.alternativeName">
+            <button 
+              class="alternative-toggle"
+              (click)="toggleAlternative(i)"
+              [class.expanded]="isAlternativeExpanded(i)">
+              <span>{{ isAlternativeExpanded(i) ? '▼' : '▶' }}</span>
+              Alternative Location
+            </button>
+
+            <div class="alternative-details" *ngIf="isAlternativeExpanded(i)">
+              <div class="detail-row">
+                <span class="label">Name:</span>
+                <span class="value">{{ feature.properties.alternativeName }}</span>
+              </div>
+
+              <div class="detail-row">
+                <span class="label">Address:</span>
+                <span class="value">{{ feature.properties.alternativeStreet }} {{ feature.properties.alternativeHouseNumber }}, {{ feature.properties.alternativeCity }}, {{ feature.properties.alternativeCountry }}</span>
+              </div>
+
+              <div class="detail-row">
+                <span class="label">Coordinates:</span>
+                <span class="value">{{ feature.properties.alternativeGeometry.coordinates[1].toFixed(7) }}, {{ feature.properties.alternativeGeometry.coordinates[0].toFixed(7) }}</span>
+              </div>
+
+              <div class="detail-row full-width" *ngIf="feature.properties.alternativeReason">
+                <span class="label">Why this alternative?</span>
+                <p class="reason">{{ feature.properties.alternativeReason }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider" *ngIf="i < tripData.features.length - 1"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="empty-state" [ngStyle]="detailsStyle" *ngIf="!tripData">
+  <p>📋 Plan a trip to see details here</p>
+</div>
